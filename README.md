@@ -1,6 +1,8 @@
-## 图片上传
-上传图片接口服务，支持上传，获取存储列表
 ## Description
+上传图片接口服务，支持上传，获取存储列表
+
+
+## API
 | 描述         | 类型 | 接口地址                                     | 参数 |
 | ------------ | ---- | -------------------------------------------- | ---- |
 | 获取图片列表 | GET  | <http://abc.alongweb.top:3000/upload/get>    |      |
@@ -24,6 +26,17 @@ $ pnpm run start:dev
 # production mode
 $ pnpm run start:prod
 ```
+
+## ## Running the app
+把dist目录文件夹上传到服务器域名下，包含package.json文件，确定服务器安装node.pm2环境.
+
+```bash
+# pnpm i
+# pm2 start main.js
+#
+
+```
+
 
 ## Test
 
