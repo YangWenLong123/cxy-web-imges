@@ -3,8 +3,8 @@
  * @Description:
  * @Date: 2023-07-27 10:01:57
  * @LastEditors: along
- * @LastEditTime: 2023-07-27 14:52:35
- * @FilePath: /cxy-web-img/src/app.controller.ts
+ * @LastEditTime: 2023-07-27 16:57:38
+ * @FilePath: /cxy-web-imges/src/app.controller.ts
  */
 import {
   Controller,
@@ -12,6 +12,7 @@ import {
   UseInterceptors,
   UploadedFile,
   Req,
+  Get,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { cos, cosUpload } from './cos.storage';
@@ -20,15 +21,11 @@ const fs = require('fs');
 
 @Controller('upload')
 export class UploadController {
-  @Post()
+  @Post('single')
   @UseInterceptors(
     FileInterceptor('file', cosUpload('along-1254323745', 'ap-nanjing')),
   )
   async uploadSingle(@UploadedFile() file, @Req() request) {
-    // const originalFilename = decodeURIComponent(
-    //   request.headers['x-original-filename'],
-    // );
-
     const originalFilename = file.filename;
 
     const params = {
@@ -38,16 +35,49 @@ export class UploadController {
       Body: fs.createReadStream(file.path), // 文件流读取
     };
 
-    await cos.putObject(params);
+    try {
+      await cos.putObject(params);
 
-    const get = await cos.getBucket({
-      Bucket: 'along-1254323745',
-      Region: 'ap-nanjing',
-    });
+      return {
+        code: 1,
+        message: 'success',
+        url: `https://along-1254323745.cos.ap-nanjing.myqcloud.com/${originalFilename}`,
+      };
+    } catch (error) {
+      return {
+        code: 0,
+        message: error,
+      };
+    }
+  }
 
-    return {
-      url: `https://along-1254323745.cos.ap-nanjing.myqcloud.com/${originalFilename}`,
-      list: get.Contents,
-    };
+  @Get('get')
+  async findAll() {
+    try {
+      const get = await cos.getBucket({
+        Bucket: 'along-1254323745',
+        Region: 'ap-nanjing',
+      });
+
+      const Contents = get.Contents.reduce((c, n) => {
+        c.push({
+          size: n.Size,
+          url: `https://along-1254323745.cos.ap-nanjing.myqcloud.com/${n.Key}`,
+          name: n.Key.split('--')[1],
+        });
+        return c;
+      }, []);
+
+      return {
+        code: 1,
+        message: 'success',
+        list: Contents,
+      };
+    } catch (error) {
+      return {
+        code: 0,
+        message: error,
+      };
+    }
   }
 }

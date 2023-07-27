@@ -1,11 +1,19 @@
+/*
+ * @Author: along
+ * @Description:
+ * @Date: 2023-07-27 15:30:47
+ * @LastEditors: along
+ * @LastEditTime: 2023-07-27 17:03:28
+ * @FilePath: /cxy-web-imges/src/cos.storage.ts
+ */
 import * as COS from 'cos-nodejs-sdk-v5';
 import * as Multer from 'multer';
 import { v4 as uuidv4 } from 'uuid';
 import * as querystring from 'querystring';
 
 export const cos = new COS({
-  SecretId: 'AKIDHVgW9iGl9LNF0b1GKI3iGetxRo1DH9pH',
-  SecretKey: 'JPHvLXZNx1tXxEJ9lALK6dw666nOyXwK',
+  SecretId: '',
+  SecretKey: '',
   FileParallelLimit: 5, //文件上传并发数
 });
 
@@ -15,7 +23,7 @@ export function cosUpload(bucket: string, region: string): Multer.Options {
       // console.log('file', file);
 
       const uniqueFileKey =
-        uuidv4() + '-' + querystring.unescape(file.originalname);
+        uuidv4() + '--' + querystring.unescape(file.originalname);
       cb(null, uniqueFileKey);
     },
   });
