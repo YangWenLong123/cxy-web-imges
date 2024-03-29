@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-07-27 10:01:57
  * @LastEditors: along
- * @LastEditTime: 2023-07-27 16:57:38
+ * @LastEditTime: 2024-03-29 14:55:16
  * @FilePath: /cxy-web-imges/src/app.controller.ts
  */
 import {
@@ -60,10 +60,12 @@ export class UploadController {
       });
 
       const Contents = get.Contents.reduce((c, n) => {
+        // console.log('####n####', n);
         c.push({
           size: n.Size,
           url: `https://along-1254323745.cos.ap-nanjing.myqcloud.com/${n.Key}`,
           name: n.Key.split('--')[1],
+          create_time: n.LastModified,
         });
         return c;
       }, []);

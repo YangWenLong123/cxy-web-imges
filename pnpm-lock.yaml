@@ -14,6 +14,7 @@ specifiers:
   '@types/supertest': ^2.0.11
   '@typescript-eslint/eslint-plugin': ^5.0.0
   '@typescript-eslint/parser': ^5.0.0
+  cors: ^2.8.5
   cos-nodejs-sdk-v5: ^2.12.2
   eslint: ^8.0.1
   eslint-config-prettier: ^8.3.0
@@ -52,6 +53,7 @@ devDependencies:
   '@types/supertest': 2.0.12
   '@typescript-eslint/eslint-plugin': 5.62.0_qe654ii6t7wri3iauos2e6o25y
   '@typescript-eslint/parser': 5.62.0_mhvizudgavq6jzvqzwcqcv4nnm
+  cors: r2.cnpmjs.org/cors/2.8.5
   cos-nodejs-sdk-v5: 2.12.2
   eslint: 8.45.0
   eslint-config-prettier: 8.8.0_eslint@8.45.0

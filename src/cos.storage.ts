@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-07-27 15:30:47
  * @LastEditors: along
- * @LastEditTime: 2023-07-27 17:03:28
+ * @LastEditTime: 2024-03-29 17:43:37
  * @FilePath: /cxy-web-imges/src/cos.storage.ts
  */
 import * as COS from 'cos-nodejs-sdk-v5';
@@ -12,7 +12,7 @@ import { v4 as uuidv4 } from 'uuid';
 import * as querystring from 'querystring';
 
 export const cos = new COS({
-  SecretId: '',
+  SecretId: 'AKIDHVgW9iGl9LNF0b1GKI3iGetxRo1DH9pH',
   SecretKey: '',
   FileParallelLimit: 5, //文件上传并发数
 });
